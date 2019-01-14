@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<canvas id="myCanvas" width="640" height="320"></canvas>
+<canvas id="myCanvas" width="640" height="420"></canvas>
 
 <script>
     var canvas = document.getElementById("myCanvas");
@@ -25,14 +25,14 @@
     var paddle1Height = 10;
     var paddle1Width = 75;
     var paddle1X = 5;
-    var paddle1Y = canvas.height-paddle1Height - 45;
+    var paddle1Y = ((canvas.height-paddle1Height) / 2) - 45;
     var up1Pressed = false;
     var down1Pressed = false;
 
     var paddle2Height = 10;
     var paddle2Width = 75;
     var paddle2X = canvas.width - 15;
-    var paddle2Y = canvas.height-paddle2Height - 45;
+    var paddle2Y = ((canvas.height-paddle2Height) / 2) - 45;
     var upPressed = false;
     var downPressed = false;
 
@@ -45,20 +45,20 @@
     document.addEventListener("keyup", keyUpHandler, false);
 
     function keyDownHandler(e) {
-        if(e.key == "Up" || e.key == "ArrowUp") {
+        if(e.keyCode == '38') {
             upPressed = true;
         }
-        else if(e.key == "Down" || e.key == "ArrowDown") {
+        else if(e.keyCode == '40') {
             downPressed = true;
         }
     }
 
     function keyUpHandler(e) {
-        if(e.key == "Up" || e.key == "ArrowUp") {
-            rightPressed = false;
+        if(e.keyCode == '38') {
+            upPressed = false;
         }
-        else if(e.key == "Down" || e.key == "ArrowDown") {
-            leftPressed = false;
+        else if(e.keyCode == '40') {
+            downPressed = false;
         }
     }
 
@@ -75,14 +75,14 @@
     }
     function drawPaddle1() {
         ctx.beginPath();
-        ctx.rect(paddle1X, paddle1Y / 2, paddle1Height, paddle1Width);
+        ctx.rect(paddle1X, paddle1Y, paddle1Height, paddle1Width);
         ctx.fillStyle = "#0095DD";
         ctx.fill();
         ctx.closePath();
     }
     function drawPaddle2() {
         ctx.beginPath();
-        ctx.rect(paddle2X, paddle2Y / 2, paddle2Height, paddle2Width);
+        ctx.rect(paddle2X, paddle2Y, paddle2Height, paddle2Width);
         ctx.fillStyle = "#0095DD";
         ctx.fill();
         ctx.closePath();
@@ -134,11 +134,11 @@
             }
         }
 
-        if(upPressed && paddle2X < canvas.height-paddleHeight) {
-            paddle2Y += 7;
-        }
-        else if(downPressed && paddle2X > 0) {
+        if(upPressed && paddle2Y > 0) {
             paddle2Y -= 7;
+        }
+        else if(downPressed && paddle2Y < canvas.height-paddleHeight) {
+            paddle2Y += 7;
         }
 
         x += dx;
