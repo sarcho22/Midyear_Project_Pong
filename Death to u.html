@@ -13,15 +13,18 @@
 <canvas id="myCanvas" width="640" height="420"></canvas>
 
 <script>
+    //canvas
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
 
+    //ball
     var ballRadius = 10;
     var x = canvas.width/2;
     var y = canvas.height-30;
     var dx = 2;
     var dy = -2;
 
+    //paddle1
     var paddle1Height = 10;
     var paddle1Width = 75;
     var paddle1X = 5;
@@ -29,6 +32,7 @@
     var up1Pressed = false;
     var down1Pressed = false;
 
+    //paddle2
     var paddle2Height = 10;
     var paddle2Width = 75;
     var paddle2X = canvas.width - 15;
@@ -36,15 +40,38 @@
     var upPressed = false;
     var downPressed = false;
 
+    //score/lives
     var score = 0;
     var lives = 3;
 
+    //Paddle 1 (left)
+    document.addEventListener("keydown", keyDownHandler1, false);
+    document.addEventListener("keyup", keyUpHandler1, false);
 
-    document.addEventListener("key1down", keyDownHandler1, false);
-    document.addEventListener("key1up", keyUpHandler1, false);
+    //Paddle 2 (right)
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
 
+    //paddle1
+    function keyDownHandler1(e) {
+        if(e.keyCode == '87') {
+            up1Pressed = true;
+        }
+        else if(e.keyCode == '83') {
+            down1Pressed = true;
+        }
+        }
+
+    function keyUpHandler1(e) {
+        if(e.keyCode == '87') {
+            up1Pressed = false;
+        }
+        else if(e.keyCode == '83') {
+            down1Pressed = false;
+        }
+    }
+
+    //paddle2
     function keyDownHandler(e) {
         if(e.keyCode == '38') {
             upPressed = true;
@@ -63,23 +90,7 @@
         }
     }
 
-    function keyDownHandler1(e) {
-        if(e.keyCode == '87') {
-            up1Pressed = true;
-        }
-        else if(e.keyCode == '83') {
-            down1Pressed = true;
-        }
-    }
 
-    function keyUpHandler1(e) {
-        if(e.keyCode == '87') {
-            up1Pressed = false;
-        }
-        else if(e.keyCode == '83') {
-            down1Pressed = false;
-        }
-    }
 
     function collisionDetection() {
 
@@ -153,19 +164,24 @@
             }
         }
 
-        if(upPressed && paddle2Y > 0) {
+
+        //paddle1
+        if(up1Pressed && paddle1Y > 6) {
+            paddle1Y -= 7;
+        }
+        else if(down1Pressed && paddle1Y < canvas.height-paddle1Height - 7) {
+            paddle1Y += 7;
+        }
+
+        //paddle2
+        if(upPressed && paddle2Y > 6) {
             paddle2Y -= 7;
         }
-        else if(downPressed && paddle2Y < canvas.height-paddleHeight) {
+        else if(downPressed && paddle2Y < canvas.height-paddleHeight - 7) {
             paddle2Y += 7;
         }
 
-        if(up1Pressed && paddle1Y > 0) {
-            paddle1Y -= 7;
-        }
-        else if(down1Pressed && paddle1Y < canvas.height-paddleHeight) {
-            paddle1Y += 7;
-        }
+
 
         x += dx;
         y += dy;
