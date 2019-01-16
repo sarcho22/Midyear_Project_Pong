@@ -140,35 +140,43 @@
         drawScore1();
         drawLives();
 
+        if(y > paddle1Y && y < paddle1Y + paddle1Width) {
+            dx = -dx;
+        }
+        else if (y > paddle2Y && y < paddle2Y + paddle2Width) {
+            dx = -dx;
+        }
 
+        if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
-        //if (rounds == 0) {
-          //  alert("GAME OVER");
-            // document.location.reload();
-        // }
-        if (x + dx > canvas.width-ballRadius) {
+            if (rounds == 0) {
+                alert("GAME OVER");
+                document.location.reload();
+            }
+            else if (x + dx > canvas.width-ballRadius){
 
-            score += 1;
-            rounds -= 1;
+                score1 += 1;
+                rounds -= 1;
 
-            x = canvas.width / 2;
-            y = canvas.height - 30;
-            dx = 3;
-            dy = -3;
-            paddle1Y = (canvas.height - paddleWidth) / 2;
+                x = canvas.width/2;
+                y = canvas.height-30;
+                dx = 3;
+                dy = -3;
+                paddleX = (canvas.width-paddleWidth)/2;
+            }
+            else if ( x + dx < ballRadius) {
+                score += 1;
+                rounds -= 1;
+
+                x = canvas.width/2;
+                y = canvas.height-30;
+                dx = 3;
+                dy = -3;
+                paddleX = (canvas.width-paddleWidth)/2;
+            }
+
+
         }
-        if (x + dx < ballRadius) {
-            score1 += 1;
-            rounds -= 1;
-
-            x = canvas.width / 2;
-            y = canvas.height - 30;
-            dx = 3;
-            dy = -3;
-            paddle1Y = (canvas.height - paddleWidth) / 2;
-        }
-
-
         if(y + dy < ballRadius || y + dy > canvas.height-ballRadius) {
             dy = -dy;
         }
