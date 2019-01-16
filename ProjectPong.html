@@ -19,16 +19,17 @@
 
     //ball
     var ballRadius = 10;
+    var hey = Math.floor((Math.random() + 1) * 3);
     var x = canvas.width/2;
-    var y = canvas.height-30;
-    var dx = 2;
-    var dy = -2;
+    var y = canvas.height/2;
+    var dx = hey;
+    var dy = -(hey) + (Math.random() + 1) * 3;
 
     //paddle1
     var paddle1Height = 10;
     var paddle1Width = 75;
     var paddle1X = 5;
-    var paddle1Y = ((canvas.height-paddle1Height) / 2) - 45;
+    var paddle1Y = ((canvas.height-paddle1Height) / 2) - 43;
     var up1Pressed = false;
     var down1Pressed = false;
 
@@ -36,7 +37,7 @@
     var paddle2Height = 10;
     var paddle2Width = 75;
     var paddle2X = canvas.width - 15;
-    var paddle2Y = ((canvas.height-paddle2Height) / 2) - 45;
+    var paddle2Y = ((canvas.height-paddle2Height) / 2) - 43;
     var upPressed = false;
     var downPressed = false;
 
@@ -169,15 +170,15 @@
         if(up1Pressed && paddle1Y > 5) {
             paddle1Y -= 7;
         }
-        else if(down1Pressed && paddle1Y < canvas.height-paddle1Height - 7) {
+        else if(down1Pressed && paddle1Y+paddle1Height + 70 < canvas.height) {
             paddle1Y += 7;
         }
 
         //paddle2
-        if(upPressed && paddle2Y > 6) {
+        if(upPressed && paddle2Y > 5) {
             paddle2Y -= 7;
         }
-        else if(downPressed && paddle2Y < canvas.height-paddle2Height - 7) {
+        else if(downPressed && paddle2Y+paddle2Height + 70 < canvas.height) {
             paddle2Y += 7;
         }
 
