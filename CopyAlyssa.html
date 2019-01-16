@@ -149,45 +149,36 @@
             }
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
             else {
-                if (!rounds) {
+                if (rounds==0) {
                     alert("GAME OVER");
                     document.location.reload();
-                } else {
+                }
+                else if (x + dx > canvas.width-ballRadius) {
+
+                    score++;
+                    rounds--;
+
                     x = canvas.width / 2;
                     y = canvas.height - 30;
                     dx = 2;
                     dy = -2;
-                    paddleX = (canvas.width - paddleWidth) / 2;
+                    paddle1Y = (canvas.height - paddle1Width) / 2;
+                    paddle2Y = (canvas.height - paddle2Width) / 2;
+                }
+                else if (x + dx < ballRadius) {
+                    score1++;
+                    rounds--;
+
+                    x = canvas.width / 2;
+                    y = canvas.height - 30;
+                    dx = 2;
+                    dy = -2;
+                    paddle1Y = (canvas.height - paddle1Width) / 2;
+                    paddle2Y = (canvas.height - paddle2Width) / 2;
                 }
             }
-        }}
-
-            // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
-        //if (rounds == 0) {
-          //  alert("GAME OVER");
-            // document.location.reload();
-        // }
-        if (x + dx > canvas.width-ballRadius) {
-
-            score++;
-            rounds--;
-
-            x = canvas.width / 2;
-            y = canvas.height - 30;
-            dx = 2;
-            dy = -2;
-            paddle1Y = (canvas.height - paddleWidth) / 2;
         }
-        if (x + dx < ballRadius) {
-            score1++;
-            rounds--;
 
-            x = canvas.width / 2;
-            y = canvas.height - 30;
-            dx = 2;
-            dy = -2;
-            paddle1Y = (canvas.height - paddleWidth) / 2;
-        }
 
 
         if(y + dy < ballRadius || y + dy > canvas.height-ballRadius) {
