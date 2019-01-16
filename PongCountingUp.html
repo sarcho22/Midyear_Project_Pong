@@ -43,7 +43,7 @@
     //score/rounds
     var score = 0;
     var score1 = 0;
-    var rounds = 4;
+    var rounds = 1;
 
     //Paddle 1 (left)
     document.addEventListener("keydown", keyDownHandler1, false);
@@ -128,7 +128,7 @@
     function drawLives() {
         ctx.font = "16px Arial";
         ctx.fillStyle = "#0095DD";
-        ctx.fillText("Rounds: "+(rounds+1), canvas.width/2 - 35, 20);
+        ctx.fillText("Rounds: "+ rounds, canvas.width/2 - 35, 20);
     }
 
     function draw() {
@@ -149,14 +149,14 @@
             }
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
             else {
-                if (rounds==0) {
+                if (rounds==5) {
                     alert("GAME OVER");
                     document.location.reload();
                 }
                 else if (x + dx > canvas.width-ballRadius) {
 
                     score++;
-                    rounds--;
+                    rounds++;
 
                     x = canvas.width / 2;
                     y = canvas.height - 30;
@@ -167,7 +167,7 @@
                 }
                 else if (x + dx < ballRadius) {
                     score1++;
-                    rounds--;
+                    rounds++;
 
                     x = canvas.width / 2;
                     y = canvas.height - 30;
@@ -180,7 +180,7 @@
         }
 
 
-
+        //aishdihdasiasdijsda
         if(y + dy < ballRadius || y + dy > canvas.height-ballRadius) {
             dy = -dy;
         }
@@ -190,15 +190,15 @@
         if(up1Pressed && paddle1Y > 5) {
             paddle1Y -= 7;
         }
-        else if(down1Pressed && paddle1Y+paddle1Height + 70 < canvas.height) {
+        else if(down1Pressed && paddle1Y < canvas.height-paddle1Height - 7) {
             paddle1Y += 7;
         }
 
         //paddle2
-        if(upPressed && paddle2Y > 5) {
+        if(upPressed && paddle2Y > 6) {
             paddle2Y -= 7;
         }
-        else if(downPressed && paddle2Y+paddle2Height + 70 < canvas.height) {
+        else if(downPressed && paddle2Y < canvas.height-paddle2Height - 7) {
             paddle2Y += 7;
         }
 
