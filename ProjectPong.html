@@ -42,7 +42,7 @@
 
     //score/lives
     var score = 0;
-    var lives = 3;
+    var lives = 5;
 
     //Paddle 1 (left)
     document.addEventListener("keydown", keyDownHandler1, false);
@@ -121,7 +121,7 @@
     function drawLives() {
         ctx.font = "16px Arial";
         ctx.fillStyle = "#0095DD";
-        ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+        ctx.fillText("Rounds: "+lives, canvas.width-65, 20);
     }
 
     function draw() {
