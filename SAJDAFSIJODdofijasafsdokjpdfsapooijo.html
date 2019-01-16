@@ -17,20 +17,18 @@
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
 
-    var ballRadius = 10;
-    var hey = Math.floor(Math.random() * canvas.height-ballRadius);
     //ball
-
+    var ballRadius = 10;
     var x = canvas.width/2;
-    var y = canvas.height/2;
-    var dx = hey;
-    var dy = -(hey);
+    var y = canvas.height-30;
+    var dx = 2;
+    var dy = -2;
 
     //paddle1
     var paddle1Height = 10;
     var paddle1Width = 75;
     var paddle1X = 5;
-    var paddle1Y = ((canvas.height-paddle1Height) / 2) - 43;
+    var paddle1Y = ((canvas.height-paddle1Height) / 2) - 45;
     var up1Pressed = false;
     var down1Pressed = false;
 
@@ -38,7 +36,7 @@
     var paddle2Height = 10;
     var paddle2Width = 75;
     var paddle2X = canvas.width - 15;
-    var paddle2Y = ((canvas.height-paddle2Height) / 2) - 43;
+    var paddle2Y = ((canvas.height-paddle2Height) / 2) - 45;
     var upPressed = false;
     var downPressed = false;
 
@@ -132,7 +130,7 @@
     }
 
     function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);;
         drawBall();
         drawPaddle1();
         drawPaddle2();
@@ -171,7 +169,7 @@
         if(up1Pressed && paddle1Y > 5) {
             paddle1Y -= 7;
         }
-        else if(down1Pressed && paddle1Y+paddle1Height + 70 < canvas.height) {
+        else if(down1Pressed && paddle1Y + paddle1Height < canvas.height-paddle1Height) {
             paddle1Y += 7;
         }
 
@@ -179,7 +177,7 @@
         if(upPressed && paddle2Y > 5) {
             paddle2Y -= 7;
         }
-        else if(downPressed && paddle2Y+paddle2Height + 70 < canvas.height) {
+        else if(downPressed && paddle2Y + paddle2Height < canvas.height-paddle2Height) {
             paddle2Y += 7;
         }
 
