@@ -19,11 +19,11 @@
 
     //ball
     var ballRadius = 10;
-    var hey = Math.floor(Math.random() * 3);
+    var hey = Math.floor((Math.random() + 1) * 3);
     var x = canvas.width/2;
     var y = canvas.height/2;
     var dx = hey;
-    var dy = -(hey);
+    var dy = -(hey) + (Math.random() + 1) * 3;
 
     //paddle1
     var paddle1Height = 10;
@@ -43,7 +43,7 @@
 
     //score/lives
     var score = 0;
-    var lives = 3;
+    var lives = 5;
 
     //Paddle 1 (left)
     document.addEventListener("keydown", keyDownHandler1, false);
@@ -92,11 +92,6 @@
     }
 
 
-
-    function collisionDetection() {
-
-    }
-
     function drawBall() {
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -127,7 +122,11 @@
     function drawLives() {
         ctx.font = "16px Arial";
         ctx.fillStyle = "#0095DD";
-        ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+        ctx.fillText("Rounds: "+lives, canvas.width-65, 20);
+    }
+
+    function collision(){
+
     }
 
     function draw() {
@@ -137,32 +136,29 @@
         drawPaddle2();
         drawScore();
         drawLives();
-        collisionDetection();
 
-        if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-            dx = -dx;
-        }
-        if(y + dy < ballRadius) {
-            dy = -dy;
-        }
-        else if(y + dy > canvas.height-ballRadius) {
-            if(x > paddleX && x < paddleX + paddleWidth) {
-                dy = -dy;
+        if(x + dx > canvas.width-ballRadius-10 || x + dx < ballRadius) {
+            if(y > paddle1Y && y < paddle1Y + paddle1Width) {
+                dx = -dx - ((Math.random() + 1) * 3);
             }
+            else if (y > paddle2Y && y < paddle2Y + paddle2Width ) {
+                dx = -dx - ((Math.random() + 1) * 3);
+            }
+            // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
             else {
-                lives--;
-                if(!lives) {
-                    alert("GAME OVER");
-                    document.location.reload();
-                }
-                else {
-                    x = canvas.width/2;
-                    y = canvas.height-30;
-                    dx = 3;
-                    dy = -3;
-                    paddleX = (canvas.width-paddleWidth)/2;
-                }
+                alert("GAME OVER");
+                document.location.reload();
+
+                x = canvas.width/2;
+                y = canvas.height-30;
+                dx = 3;
+                dy = -3;
+                paddleX = (canvas.width-paddleWidth)/2;
             }
+
+        }
+        if(y + dy < ballRadius || y + dy > canvas.height-ballRadius) {
+            dy = -dy;
         }
 
 
