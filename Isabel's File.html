@@ -90,10 +90,7 @@
             downPressed = false;
         }
     }
-
-    function drawMainMenu(){
-
-    }
+    
     function drawBall() {
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -151,21 +148,22 @@
             }
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
             else {
-                if (score == 6) {
-                    score ++;
-                    alert("Player 1 has won! "+score+":"+score1);
-                    document.location.reload();
-                }
-                else if (score1 == 6) {
-                    score ++;
-                    alert("Player 2 has won! "+score1+":"+score);
-                    document.location.reload();
+                if (score == 6||score1==6) {
+                    if (score>score1) {
+                        score++;
+                        alert("Player 1 has won!\nPlayer 1: " + score + "\nPlayer 2: " + score1);
+                        document.location.reload();
+                    }
+                    else{
+                        score ++;
+                        alert("Player 2 has won!\nPlayer 1: "+score+"\nPlayer 2: "+score1);
+                        document.location.reload();
+                    }
                 }
                 else if (x + dx > canvas.width-ballRadius) {
 
                     score++;
                     rounds++;
-
                     x = canvas.width / 2;
                     y = canvas.height - 30;
                     dx = 2;
@@ -186,9 +184,6 @@
                 }
             }
         }
-
-
-        //aishdihdasiasdijsda
         if(y + dy < ballRadius || y + dy > canvas.height-ballRadius) {
             dy = -dy;
         }
