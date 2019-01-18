@@ -142,13 +142,9 @@
 
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
             if (y > paddle1Y && y < paddle1Y + paddle1Width) {
-                dx = Math.floor((Math.random() * 10) + 1);
-                dy = Math.floor((Math.random() * -10) - 1);
                 dx = -dx;
             }
             else if (y > paddle2Y && y < paddle2Y + paddle2Width) {
-                dx = Math.floor((Math.random() * 10) + 1);
-                dy = Math.floor((Math.random() * -10) - 1);
                 dx = -dx;
             }
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
@@ -171,8 +167,8 @@
                     rounds++;
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = Math.floor((Math.random() * 10) + 1);
-                    dy = Math.floor((Math.random() * -10) - 1);
+                    dx = 3;
+                    dy = -3;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
                 }
@@ -181,8 +177,8 @@
                     rounds++;
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = Math.floor((Math.random() * 10) + 1);
-                    dy = Math.floor((Math.random() * -10) - 1);
+                    dx = 3;
+                    dy = -3;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
                 }
