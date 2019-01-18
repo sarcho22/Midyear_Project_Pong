@@ -43,7 +43,7 @@
     //score/rounds
     var score = 0;
     var score1 = 0;
-    var rounds = 1;
+    var rounds = 4;
 
     //Paddle 1 (left)
     document.addEventListener("keydown", keyDownHandler1, false);
@@ -128,7 +128,7 @@
     function drawLives() {
         ctx.font = "16px Arial";
         ctx.fillStyle = "#0095DD";
-        ctx.fillText("Rounds: "+ rounds, canvas.width/2 - 35, 20);
+        ctx.fillText("Rounds: "+(rounds+1), canvas.width/2 - 35, 20);
     }
 
     function draw() {
@@ -141,22 +141,36 @@
         drawLives();
 
 
-        if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
+        if(x + dx > (canvas.width-ballRadius - 10) || x + dx < ballRadius + 12) {
             if (y > paddle1Y && y < paddle1Y + paddle1Width) {
-                dx = -dx;
+                if (x + dx < ballRadius + 12) {
+                    dx = -dx;
+                }
             } else if (y > paddle2Y && y < paddle2Y + paddle2Width) {
-                dx = -dx;
+                if (x + dx > canvas.width-ballRadius - 10) {
+                    dx = -dx;
+                }
             }
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
             else {
-                if (score==6 || score1==6) {
-                    alert("GAME OVER");
-                    document.location.reload();
-                }
-                else if (x + dx > canvas.width-ballRadius) {
+
+                 if (x + dx > (canvas.width - ballRadius)) {
 
                     score++;
-                    rounds++;
+                    rounds--;
+
+                     if (rounds == 0) {
+                         if (score > score1) {
+                             alert("PLAYER 1 WINS! \nP1 SCORE: " + (score + 1) + "\nP2 SCORE: " + score1);
+                             document.location.reload();
+                         } else if (score < score1) {
+                             alert("PLAYER 2 WINS! \nP1 SCORE: " + score + "\nP2 SCORE: " + (score1 + 1));
+                             document.location.reload();
+                         } else if (score == score1) {
+                             alert("PLAYER 1 WINS! \nP1 SCORE: " + (score + 1) + "\nP2 SCORE: " + score1);
+                             document.location.reload();
+                         }
+                     }
 
                     x = canvas.width / 2;
                     y = canvas.height - 30;
@@ -164,10 +178,22 @@
                     dy = -2;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
-                }
-                else if (x + dx < ballRadius) {
+                } else if (x + dx < ballRadius) {
                     score1++;
-                    rounds++;
+                    rounds--;
+
+                     if (rounds == 0) {
+                         if (score > score1) {
+                             alert("PLAYER 1 WINS! \nP1 SCORE: " + (score + 1) + "\nP2 SCORE: " + score1);
+                             document.location.reload();
+                         } else if (score < score1) {
+                             alert("PLAYER 2 WINS! \nP1 SCORE: " + score + "\nP2 SCORE: " + (score1 + 1));
+                             document.location.reload();
+                         } else if (score == score1) {
+                             alert("PLAYER 2 WINS! \nP1 SCORE: " + score + "\nP2 SCORE: " + (score1 + 1));
+                             document.location.reload();
+                         }
+                     }
 
                     x = canvas.width / 2;
                     y = canvas.height - 30;
@@ -180,7 +206,7 @@
         }
 
 
-        //aishdihdasiasdijsda
+
         if(y + dy < ballRadius || y + dy > canvas.height-ballRadius) {
             dy = -dy;
         }
