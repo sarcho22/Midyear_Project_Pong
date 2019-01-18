@@ -141,10 +141,17 @@
 
 
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
-            if (y > paddle1Y && y < paddle1Y + paddle1Width && dx < 0) {
+            if (x + dx < ballRadius + 12) {
+                if (y > paddle1Y && y < paddle1Y + paddle1Width) {
+
+                    dx = -dx;
+                }
+            }
+            if (y > paddle1Y && y < paddle1Y + paddle1Width) {
+
                 dx = -dx;
             }
-            else if (y > paddle2Y && y < paddle2Y + paddle2Width && dx > 0) {
+            else if (y > paddle2Y && y < paddle2Y + paddle2Width) {
                 dx = -dx;
             }
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
