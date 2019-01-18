@@ -142,6 +142,7 @@
 
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
             if (y > paddle1Y && y < paddle1Y + paddle1Width) {
+
                 dx = -dx;
             }
             else if (y > paddle2Y && y < paddle2Y + paddle2Width) {
