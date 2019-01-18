@@ -21,8 +21,8 @@
     var ballRadius = 10;
     var x = canvas.width/2;
     var y = canvas.height-30;
-    var dx = 2;
-    var dy = -2;
+    var dx = 3;
+    var dy = -3;
 
     //paddle1
     var paddle1Height = 10;
@@ -142,10 +142,13 @@
 
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
             if (y > paddle1Y && y < paddle1Y + paddle1Width) {
-                dx = Math.floor((Math.random() * 5) + 2);
+                dx = Math.floor((Math.random() * 10) + 1);
+                dy = Math.floor((Math.random() * -10) - 1);
                 dx = -dx;
-            } else if (y > paddle2Y && y < paddle2Y + paddle2Width) {
-                dx = Math.floor((Math.random() * 5) + 2);
+            }
+            else if (y > paddle2Y && y < paddle2Y + paddle2Width) {
+                dx = Math.floor((Math.random() * 10) + 1);
+                dy = Math.floor((Math.random() * -10) - 1);
                 dx = -dx;
             }
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
@@ -168,19 +171,18 @@
                     rounds++;
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = Math.floor((Math.random() * 5) + 2);
-                    dy = Math.floor((Math.random() * -5) - 2);
+                    dx = Math.floor((Math.random() * 10) + 1);
+                    dy = Math.floor((Math.random() * -10) - 1);
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
                 }
                 else if (x + dx < ballRadius) {
                     score1++;
                     rounds++;
-
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = 2;
-                    dy = -2;
+                    dx = Math.floor((Math.random() * 10) + 1);
+                    dy = Math.floor((Math.random() * -10) - 1);
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
                 }
