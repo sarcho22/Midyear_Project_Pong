@@ -158,6 +158,19 @@
                     score++;
                     rounds++;
 
+                    if (rounds == 0) {
+                        if (score > score1) {
+                            alert("PLAYER 1 WINS! \nP1 SCORE: " + (score + 1) + "\nP2 SCORE: " + score1);
+                            document.location.reload();
+                        } else if (score < score1) {
+                            alert("PLAYER 2 WINS! \nP1 SCORE: " + score + "\nP2 SCORE: " + (score1 + 1));
+                            document.location.reload();
+                        } else if (score == score1) {
+                            alert("PLAYER 1 WINS! \nP1 SCORE: " + (score + 1) + "\nP2 SCORE: " + score1);
+                            document.location.reload();
+                        }
+                    }
+
                     x = canvas.width / 2;
                     y = canvas.height - 30;
                     dx = 2;
@@ -168,6 +181,19 @@
                 else if (x + dx < ballRadius) {
                     score1++;
                     rounds++;
+
+                    if (rounds == 0) {
+                        if (score > score1) {
+                            alert("PLAYER 1 WINS! \nP1 SCORE: " + (score + 1) + "\nP2 SCORE: " + score1);
+                            document.location.reload();
+                        } else if (score < score1) {
+                            alert("PLAYER 2 WINS! \nP1 SCORE: " + score + "\nP2 SCORE: " + (score1 + 1));
+                            document.location.reload();
+                        } else if (score == score1) {
+                            alert("PLAYER 2 WINS! \nP1 SCORE: " + score + "\nP2 SCORE: " + (score1 + 1));
+                            document.location.reload();
+                        }
+                    }
 
                     x = canvas.width / 2;
                     y = canvas.height - 30;
