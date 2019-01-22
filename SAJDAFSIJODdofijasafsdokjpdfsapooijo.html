@@ -5,7 +5,7 @@
     <title>Gamedev Canvas Workshop</title>
     <style>
         * { padding: 0; margin: 0; }
-        canvas { background: #eee; display: block; margin: 0 auto; }
+        canvas { background: #000000; display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
@@ -21,8 +21,8 @@
     var ballRadius = 10;
     var x = canvas.width/2;
     var y = canvas.height-30;
-    var dx = 2;
-    var dy = -2;
+    var dx = 3;
+    var dy = -3;
 
     //paddle1
     var paddle1Height = 10;
@@ -91,44 +91,72 @@
         }
     }
 
-
     function drawBall() {
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = "#0010dd";
         ctx.fill();
         ctx.closePath();
     }
     function drawPaddle1() {
         ctx.beginPath();
         ctx.rect(paddle1X, paddle1Y, paddle1Height, paddle1Width);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = "#fffd45";
         ctx.fill();
         ctx.closePath();
     }
     function drawPaddle2() {
         ctx.beginPath();
         ctx.rect(paddle2X, paddle2Y, paddle2Height, paddle2Width);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = "#fffd45";
         ctx.fill();
         ctx.closePath();
     }
 
     function drawScore() {
-        ctx.font = "16px Arial";
-        ctx.fillStyle = "#0095DD";
+        ctx.font = "16px Arial Black";
+        ctx.fillStyle = "#fffd49";
         ctx.fillText("Score P1: "+score, 8, 20);
     }
 
     function drawScore1() {
-        ctx.font = "16px Arial";
-        ctx.fillStyle = "#0095DD";
+        ctx.font = "16px Arial Black";
+        ctx.fillStyle = "#fffd49";
         ctx.fillText("Score P2: "+score1, canvas.width-100, 20);
     }
     function drawLives() {
-        ctx.font = "16px Arial";
-        ctx.fillStyle = "#0095DD";
+        ctx.font = "16px Arial Black";
+        ctx.fillStyle = "#fffd49";
         ctx.fillText("Rounds: "+ rounds, canvas.width/2 - 35, 20);
+    }
+
+
+    function drawFace() {
+        if(dx > 0) {
+            var eye1 = x - 2;
+            var eye2 = x + 5;
+        } else {
+            var eye1 = x - 5;
+            var eye2 = x + 2;
+        }
+        ctx.beginPath();
+        ctx.arc(eye1, y-2, 2, 0, Math.PI*2);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(eye2, y-2, 2, 0, Math.PI*2);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.rect(x-4, y+4, 10, 1);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
+
     }
 
     function draw() {
@@ -139,48 +167,53 @@
         drawScore();
         drawScore1();
         drawLives();
+        drawFace();
 
 
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
-            if (y > paddle1Y && y < paddle1Y + paddle1Width) {
+            if (y > paddle1Y && y < paddle1Y + paddle1Width && dx < 0) {
                 dx = -dx;
-            } else if (y > paddle2Y && y < paddle2Y + paddle2Width) {
+            }
+            else if (y > paddle2Y && y < paddle2Y + paddle2Width && dx > 0) {
                 dx = -dx;
             }
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
             else {
-                if (score==6 || score1==6) {
-                    alert("GAME OVER");
-                    document.location.reload();
+                if (score == 6||score1==6) {
+                    if (score>score1) {
+                        score++;
+                        alert("Player 1 has won!\nPlayer 1: " + score + "\nPlayer 2: " + score1);
+                        document.location.reload();
+                    }
+                    else{
+                        score ++;
+                        alert("Player 2 has won!\nPlayer 1: "+score+"\nPlayer 2: "+score1);
+                        document.location.reload();
+                    }
                 }
                 else if (x + dx > canvas.width-ballRadius) {
 
                     score++;
                     rounds++;
-
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = 2;
-                    dy = -2;
+                    dx = 3;
+                    dy = -3;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
                 }
                 else if (x + dx < ballRadius) {
                     score1++;
                     rounds++;
-
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = 2;
-                    dy = -2;
+                    dx = 3;
+                    dy = -3;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
                 }
             }
         }
-
-
-        //aishdihdasiasdijsda
         if(y + dy < ballRadius || y + dy > canvas.height-ballRadius) {
             dy = -dy;
         }
