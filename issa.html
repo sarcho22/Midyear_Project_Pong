@@ -19,10 +19,11 @@
 
     //ball
     var ballRadius = 10;
+    var diameter = ballRadius * 2;
     var x = canvas.width/2;
     var y = canvas.height-30;
-    var dx = 3;
-    var dy = -3;
+    var dx = 2;
+    var dy = -2;
 
     //paddle1
     var paddle1Height = 10;
@@ -127,7 +128,34 @@
     function drawLives() {
         ctx.font = "16px Arial";
         ctx.fillStyle = "#0095DD";
-        ctx.fillText("Rounds: "+ rounds, canvas.width/2 - 35, 20);
+        ctx.fillText("Round #"+ rounds, canvas.width/2 - 35, 20);
+    }
+    function drawFace() {
+        if(dx > 0) {
+            var eye1 = x - 2;
+            var eye2 = x + 5;
+        } else {
+            var eye1 = x - 5;
+            var eye2 = x + 2;
+        }
+        ctx.beginPath();
+        ctx.arc(eye1, y-2, 2, 0, Math.PI*2);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(eye2, y-2, 2, 0, Math.PI*2);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.rect(x-4, y+4, 10, 1);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
+
     }
 
     function draw() {
@@ -138,6 +166,7 @@
         drawScore();
         drawScore1();
         drawLives();
+        drawFace();
 
 
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
@@ -167,8 +196,8 @@
                     rounds++;
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = 3;
-                    dy = -3;
+                    dx = 2;
+                    dy = -2;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
                 }
@@ -177,8 +206,8 @@
                     rounds++;
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = 3;
-                    dy = -3;
+                    dx = 2;
+                    dy = -2;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
                 }
