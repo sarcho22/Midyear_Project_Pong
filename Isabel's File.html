@@ -142,10 +142,10 @@
 
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
             if (y > paddle1Y && y < paddle1Y + paddle1Width && dx < 0) {
-                dx = -dx;
+                dx = Math.floor(Math.random() * 5) + 3;
             }
             else if (y > paddle2Y && y < paddle2Y + paddle2Width && dx > 0) {
-                dx = -dx;
+                dx = -Math.floor(Math.random() * 5) - 3;
             }
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
             else {
@@ -156,7 +156,7 @@
                         document.location.reload();
                     }
                     else{
-                        score ++;
+                        score1++;
                         alert("Player 2 has won!\nPlayer 1: "+score+"\nPlayer 2: "+score1);
                         document.location.reload();
                     }
