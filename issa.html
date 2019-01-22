@@ -134,9 +134,13 @@
         if(dx > 0) {
             var eye1 = x - 2;
             var eye2 = x + 5;
+            var mouthX = x-4;
+            var mouthY = y+4;
         } else {
             var eye1 = x - 5;
             var eye2 = x + 2;
+            var mouthX = x-7;
+            var mouthY = y+4;
         }
         ctx.beginPath();
         ctx.arc(eye1, y-2, 2, 0, Math.PI*2);
@@ -151,7 +155,7 @@
         ctx.closePath();
 
         ctx.beginPath();
-        ctx.rect(x-4, y+4, 10, 1);
+        ctx.rect(mouthX, mouthY, 10, 1);
         ctx.fillStyle = "#000";
         ctx.fill();
         ctx.closePath();
