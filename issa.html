@@ -5,7 +5,7 @@
     <title>Gamedev Canvas Workshop</title>
     <style>
         * { padding: 0; margin: 0; }
-        canvas { background: #eee; display: block; margin: 0 auto; }
+        canvas { background: rgba(3, 3, 3, 0.93); display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
@@ -95,48 +95,52 @@
     function drawBall() {
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = "#fffd49";
         ctx.fill();
         ctx.closePath();
     }
     function drawPaddle1() {
         ctx.beginPath();
         ctx.rect(paddle1X, paddle1Y, paddle1Height, paddle1Width);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = "#0010dd";
         ctx.fill();
         ctx.closePath();
     }
     function drawPaddle2() {
         ctx.beginPath();
         ctx.rect(paddle2X, paddle2Y, paddle2Height, paddle2Width);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = "#0010dd";
         ctx.fill();
         ctx.closePath();
     }
 
     function drawScore() {
         ctx.font = "16px Arial";
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = "#ff000b";
         ctx.fillText("Score P1: "+score, 8, 20);
     }
 
     function drawScore1() {
         ctx.font = "16px Arial";
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = "#ff000b";
         ctx.fillText("Score P2: "+score1, canvas.width-100, 20);
     }
     function drawLives() {
         ctx.font = "16px Arial";
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = "#ff000b";
         ctx.fillText("Round #"+ rounds, canvas.width/2 - 35, 20);
     }
     function drawFace() {
         if(dx > 0) {
             var eye1 = x - 2;
             var eye2 = x + 5;
+            var mouthX = x-4;
+            var mouthY = y+4;
         } else {
             var eye1 = x - 5;
             var eye2 = x + 2;
+            var mouthX = x-7;
+            var mouthY = y+4;
         }
         ctx.beginPath();
         ctx.arc(eye1, y-2, 2, 0, Math.PI*2);
@@ -151,7 +155,7 @@
         ctx.closePath();
 
         ctx.beginPath();
-        ctx.rect(x-4, y+4, 10, 1);
+        ctx.rect(mouthX, mouthY, 10, 1);
         ctx.fillStyle = "#000";
         ctx.fill();
         ctx.closePath();
