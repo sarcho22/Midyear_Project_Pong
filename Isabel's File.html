@@ -98,6 +98,9 @@
         ctx.fill();
         ctx.closePath();
     }
+    function drawBallDies(){
+
+    }
     function drawPaddle1() {
         ctx.beginPath();
         ctx.rect(paddle1X, paddle1Y, paddle1Height, paddle1Width);
@@ -139,13 +142,12 @@
         drawScore1();
         drawLives();
 
-
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
             if (y > paddle1Y && y < paddle1Y + paddle1Width && dx < 0) {
-                dx = Math.floor(Math.random() * 5) + 3;
+                dx = Math.floor(Math.random() * 7) + 3;
             }
             else if (y > paddle2Y && y < paddle2Y + paddle2Width && dx > 0) {
-                dx = -Math.floor(Math.random() * 5) - 3;
+                dx = -Math.floor(Math.random() * 7) - 3;
             }
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
             else {
