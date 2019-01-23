@@ -98,6 +98,10 @@
         ctx.fill();
         ctx.closePath();
     }
+    function drawBallTrail(){
+        ctx.beginPath();
+
+    }
     function drawBallDies(){
 
     }
@@ -141,7 +145,6 @@
         drawScore();
         drawScore1();
         drawLives();
-
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
             if (y > paddle1Y && y < paddle1Y + paddle1Width && dx < 0) {
                 dx = Math.floor(Math.random() * 7) + 3;
