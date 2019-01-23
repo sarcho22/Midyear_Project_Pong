@@ -26,7 +26,7 @@
 
     //paddle1
     var paddle1Height = 10;
-    var paddle1Width = 75;
+    var paddle1Width = 76;
     var paddle1X = 5;
     var paddle1Y = ((canvas.height-paddle1Height) / 2) - 45;
     var up1Pressed = false;
@@ -34,7 +34,7 @@
 
     //paddle2
     var paddle2Height = 10;
-    var paddle2Width = 75;
+    var paddle2Width = 76;
     var paddle2X = canvas.width - 15;
     var paddle2Y = ((canvas.height-paddle2Height) / 2) - 45;
     var upPressed = false;
@@ -173,30 +173,30 @@
 
 
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
-            if (y < (paddle1Y) && y < (paddle1Y + (paddle1Width / 2))&& dx < 0) {
+            if (y > (paddle1Y) && y < (paddle1Y + 38) && dx < 0) {
                 dx = -dx;
-                dy = -4;
+                dy = -4.5;
 
             }
-            else if (y < (paddle1Y + paddle1Width) && y > (paddle1Y + (paddle1Width / 2)) && dx < 0) {
+            else if (y < (paddle1Y + paddle1Width) && y > (paddle1Y + 38) && dx < 0) {
                 dx = -dx;
-                dy = 4;
+                dy = 4.5;
             }
-            else if (y == (paddle1Y + (paddle1Width / 2))) {
+            else if (y < (paddle1Y + 45) && y > (paddle1Y + 31) && dx < 0) {
                 dx = -dx;
                 dy = 0;
             }
 
-            if (y < (paddle2Y) && y > (paddle2Y + (paddle2Width / 2))&& dx > 0) {
+            if (y > (paddle2Y) && y < (paddle2Y + 38)&& dx > 0) {
                 dx = -dx;
-                dy = -4;
+                dy = -4.5;
 
             }
-            else if (y < (paddle2Y + paddle2Width) && y < (paddle2Y + (paddle2Width / 2)) && dx > 0) {
+            else if (y < (paddle2Y + paddle2Width) && y > (paddle2Y + 38) && dx > 0) {
                 dx = -dx;
-                dy = 4;
+                dy = 4.5;
             }
-            else if (y == (paddle2Y + (paddle2Width / 2))) {
+            else if (y < (paddle2Y + 45) && y > (paddle2Y + 31) && dx > 0) {
                 dx = -dx;
                 dy = 0;
             }
@@ -204,26 +204,15 @@
 
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
             else {
-                if (score == 6||score1==6) {
-                    if (score>score1) {
-                        score++;
-                        alert("Player 1 has won!\nPlayer 1: " + score + "\nPlayer 2: " + score1);
-                        document.location.reload();
-                    }
-                    else{
-                        score ++;
-                        alert("Player 2 has won!\nPlayer 1: "+score+"\nPlayer 2: "+score1);
-                        document.location.reload();
-                    }
-                }
-                else if (x + dx > canvas.width-ballRadius) {
+
+                if (x + dx > canvas.width-ballRadius) {
 
                     score++;
                     rounds++;
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = 2;
-                    dy = -2;
+                    dx = 4;
+                    dy = -4;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
                 }
@@ -232,10 +221,21 @@
                     rounds++;
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = 2;
-                    dy = -2;
+                    dx = 4;
+                    dy = -4;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
+                }
+                if (score == 6||score1==6) {
+                    if (score>score1) {
+                        alert("Player 1 has won!\nPlayer 1: " + score + "\nPlayer 2: " + score1);
+                        document.location.reload();
+                    }
+                    else{
+                        alert("Player 2 has won!\nPlayer 1: "+score+"\nPlayer 2: "+score1);
+                        document.location.reload();
+                    }
+
                 }
             }
         }
