@@ -185,29 +185,34 @@
             if (y > (paddle1Y) && y < (paddle1Y + 34) && dx < 0) {
                 dx = -dx;
                 dy = -4;
-
+                document.body.style.backgroundColor = "red";
             }
             else if (y < (paddle1Y + paddle1Width) && y > (paddle1Y + 38) && dx < 0) {
                 dx = -dx;
                 dy = 4;
+                document.body.style.backgroundColor = "blue";
             }
             else if (y <= (paddle1Y + 38) && y >= (paddle1Y + 34) && dx < 0) {
                 dx = -dx;
                 dy = 0;
+                document.body.style.backgroundColor = "white";
             }
 
             else if (y > (paddle2Y) && y < (paddle2Y + 34)&& dx > 0) {
                 dx = -dx;
                 dy = -4;
+                document.body.style.backgroundColor = "orchid";
 
             }
             else if (y < (paddle2Y + paddle2Width) && y > (paddle2Y + 38) && dx > 0) {
                 dx = -dx;
                 dy = 4;
+                document.body.style.backgroundColor = "aqua";
             }
             else if (y <= (paddle2Y + 38) && y >= (paddle2Y + 34) && dx > 0) {
                 dx = -dx;
                 dy = 0;
+                document.body.style.backgroundColor = "coral";
             }
 
 
@@ -224,6 +229,7 @@
                     dy = -4;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
+                    document.body.style.backgroundColor = "chartreuse";
                 }
                 else if (x + dx < ballRadius) {
                     score1++;
@@ -234,6 +240,7 @@
                     dy = -4;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
+                    document.body.style.backgroundColor = "magenta";
                 }
                 if (score == 6||score1==6) {
                     if (score>score1) {
