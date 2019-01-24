@@ -182,30 +182,30 @@
 
 
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
-            if (y > (paddle1Y) && y < (paddle1Y + 31) && dx < 0) {
+            if (y > (paddle1Y) && y < (paddle1Y + 34) && dx < 0) {
                 dx = -dx;
                 dy = -4;
 
             }
-            else if (y < (paddle1Y + paddle1Width) && y > (paddle1Y + 45) && dx < 0) {
+            else if (y < (paddle1Y + paddle1Width) && y > (paddle1Y + 38) && dx < 0) {
                 dx = -dx;
                 dy = 4;
             }
-            else if (y <= (paddle1Y + 45) && y >= (paddle1Y + 31) && dx < 0) {
+            else if (y <= (paddle1Y + 38) && y >= (paddle1Y + 34) && dx < 0) {
                 dx = -dx;
                 dy = 0;
             }
 
-            else if (y > (paddle2Y) && y < (paddle2Y + 31)&& dx > 0) {
+            else if (y > (paddle2Y) && y < (paddle2Y + 34)&& dx > 0) {
                 dx = -dx;
                 dy = -4;
 
             }
-            else if (y < (paddle2Y + paddle2Width) && y > (paddle2Y + 45) && dx > 0) {
+            else if (y < (paddle2Y + paddle2Width) && y > (paddle2Y + 38) && dx > 0) {
                 dx = -dx;
                 dy = 4;
             }
-            else if (y <= (paddle2Y + 45) && y >= (paddle2Y + 31) && dx > 0) {
+            else if (y <= (paddle2Y + 38) && y >= (paddle2Y + 34) && dx > 0) {
                 dx = -dx;
                 dy = 0;
             }
