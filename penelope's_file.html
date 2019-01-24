@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Gamedev Canvas Workshop</title>
+    <style>
+        * { padding: 0; margin: 0; }
+        canvas { background: rgba(3, 3, 3, 0.93); display: block; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="640" height="420"></canvas>
+
+<script>
+    //canvas
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    //ball
+    var ballRadius = 10;
+    var x = canvas.width/2;
+    var y = canvas.height-30;
+    var dx = 4;
+    var dy = -4;
+
+    //paddle1
+    var paddle1Height = 10;
+    var paddle1Width = 76;
+    var paddle1X = 5;
+    var paddle1Y = ((canvas.height-paddle1Height) / 2) - 45;
+    var up1Pressed = false;
+    var down1Pressed = false;
+
+    //paddle2
+    var paddle2Height = 10;
+    var paddle2Width = 76;
+    var paddle2X = canvas.width - 15;
+    var paddle2Y = ((canvas.height-paddle2Height) / 2) - 45;
+    var upPressed = false;
+    var downPressed = false;
+
+    //score/rounds
+    var score = 0;
+    var score1 = 0;
+    var rounds = 1;
+
+    //Paddle 1 (left)
+    document.addEventListener("keydown", keyDownHandler1, false);
+    document.addEventListener("keyup", keyUpHandler1, false);
+
+    //Paddle 2 (right)
+    document.addEventListener("keydown", keyDownHandler, false);
+    document.addEventListener("keyup", keyUpHandler, false);
+
+    //paddle1
+    function keyDownHandler1(e) {
+        if(e.keyCode == '87') {
+            up1Pressed = true;
+        }
+        else if(e.keyCode == '83') {
+            down1Pressed = true;
+        }
+    }
+
+    function keyUpHandler1(e) {
+        if(e.keyCode == '87') {
+            up1Pressed = false;
+        }
+        else if(e.keyCode == '83') {
+            down1Pressed = false;
+        }
+    }
+
+    //paddle2
+    function keyDownHandler(e) {
+        if(e.keyCode == '38') {
+            upPressed = true;
+        }
+        else if(e.keyCode == '40') {
+            downPressed = true;
+        }
+    }
+
+    function keyUpHandler(e) {
+        if(e.keyCode == '38') {
+            upPressed = false;
+        }
+        else if(e.keyCode == '40') {
+            downPressed = false;
+        }
+    }
+
+    function drawBall() {
+        ctx.beginPath();
+        ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+        ctx.fillStyle = "#fffd49";
+        ctx.fill();
+        ctx.closePath();
+    }
+    function drawPaddle1() {
+        ctx.beginPath();
+        ctx.rect(paddle1X, paddle1Y, paddle1Height, paddle1Width);
+        ctx.fillStyle = "#0010dd";
+        ctx.fill();
+        ctx.closePath();
+    }
+    function drawPaddle2() {
+        ctx.beginPath();
+        ctx.rect(paddle2X, paddle2Y, paddle2Height, paddle2Width);
+        ctx.fillStyle = "#0010dd";
+        ctx.fill();
+        ctx.closePath();
+    }
+
+    function drawScore() {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#ff000b";
+        ctx.fillText("Score P1: "+score, 8, 20);
+    }
+
+    function drawScore1() {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#ff000b";
+        ctx.fillText("Score P2: "+score1, canvas.width-100, 20);
+    }
+    function drawLives() {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#ff000b";
+        ctx.fillText("Round #"+ rounds, canvas.width/2 - 35, 20);
+    }
+    function drawFace() {
+        if(dx > 0) {
+            var eye1 = x - 2;
+            var eye2 = x + 5;
+            var mouthX = x-4;
+            var mouthY = y+4;
+        } else {
+            var eye1 = x - 5;
+            var eye2 = x + 2;
+            var mouthX = x-6;
+            var mouthY = y+4;
+        }
+        ctx.beginPath();
+        ctx.arc(eye1, y-2, 2, 0, Math.PI*2);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(eye2, y-2, 2, 0, Math.PI*2);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.rect(mouthX, mouthY, 10, 1);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
+
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBall();
+        drawPaddle1();
+        drawPaddle2();
+        drawScore();
+        drawScore1();
+        drawLives();
+        drawFace();
+
+
+        if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
+            if (y > (paddle1Y) && y < (paddle1Y + 31) && dx < 0) {
+                dx = -dx;
+                dy = -4;
+
+            }
+            else if (y < (paddle1Y + paddle1Width) && y > (paddle1Y + 45) && dx < 0) {
+                dx = -dx;
+                dy = 4;
+            }
+            else if (y <= (paddle1Y + 45) && y >= (paddle1Y + 31) && dx < 0) {
+                dx = -dx;
+                dy = 0;
+            }
+
+            else if (y > (paddle2Y) && y < (paddle2Y + 31)&& dx > 0) {
+                dx = -dx;
+                dy = -4;
+
+            }
+            else if (y < (paddle2Y + paddle2Width) && y > (paddle2Y + 45) && dx > 0) {
+                dx = -dx;
+                dy = 4;
+            }
+            else if (y <= (paddle2Y + 45) && y >= (paddle2Y + 31) && dx > 0) {
+                dx = -dx;
+                dy = 0;
+            }
+
+
+            // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
+            else {
+
+                if (x + dx > canvas.width-ballRadius) {
+
+                    score++;
+                    rounds++;
+                    x = canvas.width / 2;
+                    y = canvas.height - 30;
+                    dx = 4;
+                    dy = -4;
+                    paddle1Y = (canvas.height - paddle1Width) / 2;
+                    paddle2Y = (canvas.height - paddle2Width) / 2;
+                }
+                else if (x + dx < ballRadius) {
+                    score1++;
+                    rounds++;
+                    x = canvas.width / 2;
+                    y = canvas.height - 30;
+                    dx = 4;
+                    dy = -4;
+                    paddle1Y = (canvas.height - paddle1Width) / 2;
+                    paddle2Y = (canvas.height - paddle2Width) / 2;
+                }
+                if (score == 6||score1==6) {
+                    if (score>score1) {
+                        alert("Player 1 has won!\nPlayer 1: " + score + "\nPlayer 2: " + score1);
+                        document.location.reload();
+                    }
+                    else{
+                        alert("Player 2 has won!\nPlayer 1: "+score+"\nPlayer 2: "+score1);
+                        document.location.reload();
+                    }
+
+                }
+            }
+        }
+        if(y + dy < ballRadius || y + dy > canvas.height-ballRadius) {
+            dy = -dy;
+        }
+
+
+        //paddle1
+        if(up1Pressed && paddle1Y > 5) {
+            paddle1Y -= 7;
+        }
+        else if(down1Pressed && paddle1Y+paddle1Height + 70 < canvas.height) {
+            paddle1Y += 7;
+        }
+
+        //paddle2
+        if(upPressed && paddle2Y > 5) {
+            paddle2Y -= 7;
+        }
+        else if(downPressed && paddle2Y+paddle2Height + 70 < canvas.height) {
+            paddle2Y += 7;
+        }
+
+
+
+        x += dx;
+        y += dy;
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+</script>
+
+</body>
+</html>
