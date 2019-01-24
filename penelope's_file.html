@@ -185,7 +185,7 @@
             if (y > (paddle1Y) && y < (paddle1Y + 34) && dx < 0) {
                 dx = -dx;
                 dy = -4;
-                document.body.style.backgroundColor = "red";
+                document.body.style.backgroundColor = "cornflowerblue";
             }
             else if (y < (paddle1Y + paddle1Width) && y > (paddle1Y + 38) && dx < 0) {
                 dx = -dx;
@@ -229,7 +229,7 @@
                     dy = -4;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
-                    document.body.style.backgroundColor = "chartreuse";
+                    document.body.style.backgroundColor = "black";
                 }
                 else if (x + dx < ballRadius) {
                     score1++;
@@ -240,7 +240,7 @@
                     dy = -4;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
-                    document.body.style.backgroundColor = "magenta";
+                    document.body.style.backgroundColor = "black";
                 }
                 if (score == 6||score1==6) {
                     if (score>score1) {
