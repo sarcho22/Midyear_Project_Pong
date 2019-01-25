@@ -5,17 +5,21 @@
     <title>Gamedev Canvas Workshop</title>
     <style>
         * { padding: 0; margin: 0; }
-        canvas { background: rgba(3, 3, 3, 0.93); display: block; margin: 0 auto; }
+        canvas {display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
+<img id="pacman" width ="0" height = "0" src="https://i.pinimg.com/originals/52/a3/3c/52a33c10ae0c117156dd2807a4f324da.png">
 
 <canvas id="myCanvas" width="640" height="420"></canvas>
 
 <script>
-    //canvas
-    var canvas = document.getElementById("myCanvas");
-    var ctx = canvas.getContext("2d");
+    window.onload = function() {
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        var img = document.getElementById("pacman");
+        ctx.drawImage(img,0,0, 640, 420);
+    }
 
     //ball
     var ballRadius = 10;

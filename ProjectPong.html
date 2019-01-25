@@ -5,7 +5,7 @@
     <title>Gamedev Canvas Workshop</title>
     <style>
         * { padding: 0; margin: 0; }
-        canvas { background: rgba(0, 0, 0, 0.93); display: block; margin: 0 auto; }
+        canvas { background: rgba(3, 3, 3, 0.93); display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
@@ -19,10 +19,11 @@
 
     //ball
     var ballRadius = 10;
+    var diameter = ballRadius * 2;
     var x = canvas.width/2;
     var y = canvas.height-30;
-    var dx = 3;
-    var dy = -3;
+    var dx = 2;
+    var dy = -2;
 
     //paddle1
     var paddle1Height = 10;
@@ -114,20 +115,51 @@
     }
 
     function drawScore() {
-        ctx.font = "16px Papyrus";
+        ctx.font = "16px Arial Black";
         ctx.fillStyle = "#ff000b";
         ctx.fillText("Score P1: "+score, 8, 20);
     }
 
     function drawScore1() {
-        ctx.font = "16px Papyrus";
+        ctx.font = "16px Arial Black";
         ctx.fillStyle = "#ff000b";
         ctx.fillText("Score P2: "+score1, canvas.width-100, 20);
     }
     function drawLives() {
-        ctx.font = "16px Baloo Thambi";
+        ctx.font = "16px Arial Black";
         ctx.fillStyle = "#ff000b";
         ctx.fillText("Round #"+ rounds, canvas.width/2 - 35, 20);
+    }
+    function drawFace() {
+        if(dx > 0) {
+            var eye1 = x - 2;
+            var eye2 = x + 5;
+            var mouthX = x-4;
+            var mouthY = y+4;
+        } else {
+            var eye1 = x - 5;
+            var eye2 = x + 2;
+            var mouthX = x-7;
+            var mouthY = y+4;
+        }
+        ctx.beginPath();
+        ctx.arc(eye1, y-2, 2, 0, Math.PI*2);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(eye2, y-2, 2, 0, Math.PI*2);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.rect(mouthX, mouthY, 10, 1);
+        ctx.fillStyle = "#000";
+        ctx.fill();
+        ctx.closePath();
+
     }
 
     function draw() {
@@ -138,6 +170,7 @@
         drawScore();
         drawScore1();
         drawLives();
+        drawFace();
 
 
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
@@ -167,8 +200,8 @@
                     rounds++;
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = 3;
-                    dy = -3;
+                    dx = 2;
+                    dy = -2;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
                 }
@@ -177,8 +210,8 @@
                     rounds++;
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = 3;
-                    dy = -3;
+                    dx = 2;
+                    dy = -2;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
                 }
