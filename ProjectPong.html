@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -19,15 +28,14 @@
 
     //ball
     var ballRadius = 10;
-    var diameter = ballRadius * 2;
     var x = canvas.width/2;
     var y = canvas.height-30;
-    var dx = 2;
-    var dy = -2;
+    var dx = 4;
+    var dy = -4;
 
     //paddle1
     var paddle1Height = 10;
-    var paddle1Width = 75;
+    var paddle1Width = 76;
     var paddle1X = 5;
     var paddle1Y = ((canvas.height-paddle1Height) / 2) - 45;
     var up1Pressed = false;
@@ -35,7 +43,7 @@
 
     //paddle2
     var paddle2Height = 10;
-    var paddle2Width = 75;
+    var paddle2Width = 76;
     var paddle2X = canvas.width - 15;
     var paddle2Y = ((canvas.height-paddle2Height) / 2) - 45;
     var upPressed = false;
@@ -115,18 +123,18 @@
     }
 
     function drawScore() {
-        ctx.font = "16px Arial Black";
+        ctx.font = "16px Arial";
         ctx.fillStyle = "#ff000b";
         ctx.fillText("Score P1: "+score, 8, 20);
     }
 
     function drawScore1() {
-        ctx.font = "16px Arial Black";
+        ctx.font = "16px Arial";
         ctx.fillStyle = "#ff000b";
         ctx.fillText("Score P2: "+score1, canvas.width-100, 20);
     }
     function drawLives() {
-        ctx.font = "16px Arial Black";
+        ctx.font = "16px Arial";
         ctx.fillStyle = "#ff000b";
         ctx.fillText("Round #"+ rounds, canvas.width/2 - 35, 20);
     }
@@ -139,7 +147,7 @@
         } else {
             var eye1 = x - 5;
             var eye2 = x + 2;
-            var mouthX = x-7;
+            var mouthX = x-6;
             var mouthY = y+4;
         }
         ctx.beginPath();
@@ -174,46 +182,76 @@
 
 
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
-            if (y > paddle1Y && y < paddle1Y + paddle1Width && dx < 0) {
+            if (y > (paddle1Y) && y < (paddle1Y + 34) && dx < 0) {
                 dx = -dx;
+                dy = -4;
+                document.body.style.backgroundColor = "cornflowerblue";
             }
-            else if (y > paddle2Y && y < paddle2Y + paddle2Width && dx > 0) {
+            else if (y < (paddle1Y + paddle1Width) && y > (paddle1Y + 38) && dx < 0) {
                 dx = -dx;
+                dy = 4;
+                document.body.style.backgroundColor = "blue";
             }
+            else if (y <= (paddle1Y + 38) && y >= (paddle1Y + 34) && dx < 0) {
+                dx = -dx;
+                dy = 0;
+                document.body.style.backgroundColor = "white";
+            }
+
+            else if (y > (paddle2Y) && y < (paddle2Y + 34)&& dx > 0) {
+                dx = -dx;
+                dy = -4;
+                document.body.style.backgroundColor = "orchid";
+
+            }
+            else if (y < (paddle2Y + paddle2Width) && y > (paddle2Y + 38) && dx > 0) {
+                dx = -dx;
+                dy = 4;
+                document.body.style.backgroundColor = "aqua";
+            }
+            else if (y <= (paddle2Y + 38) && y >= (paddle2Y + 34) && dx > 0) {
+                dx = -dx;
+                dy = 0;
+                document.body.style.backgroundColor = "coral";
+            }
+
+
             // remember to add separate if functions for x +dx > canvas.width - balRadius and x + dx < ballRadius for different scores
             else {
-                if (score == 6||score1==6) {
-                    if (score>score1) {
-                        score++;
-                        alert("Player 1 has won!\nPlayer 1: " + score + "\nPlayer 2: " + score1);
-                        document.location.reload();
-                    }
-                    else{
-                        score ++;
-                        alert("Player 2 has won!\nPlayer 1: "+score+"\nPlayer 2: "+score1);
-                        document.location.reload();
-                    }
-                }
-                else if (x + dx > canvas.width-ballRadius) {
+
+                if (x + dx > canvas.width-ballRadius) {
 
                     score++;
                     rounds++;
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = 2;
-                    dy = -2;
+                    dx = 4;
+                    dy = -4;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
+                    document.body.style.backgroundColor = "black";
                 }
                 else if (x + dx < ballRadius) {
                     score1++;
                     rounds++;
                     x = canvas.width / 2;
                     y = canvas.height - 30;
-                    dx = 2;
-                    dy = -2;
+                    dx = 4;
+                    dy = -4;
                     paddle1Y = (canvas.height - paddle1Width) / 2;
                     paddle2Y = (canvas.height - paddle2Width) / 2;
+                    document.body.style.backgroundColor = "black";
+                }
+                if (score == 6||score1==6) {
+                    if (score>score1) {
+                        alert("Player 1 has won!\nPlayer 1: " + score + "\nPlayer 2: " + score1);
+                        document.location.reload();
+                    }
+                    else{
+                        alert("Player 2 has won!\nPlayer 1: "+score+"\nPlayer 2: "+score1);
+                        document.location.reload();
+                    }
+
                 }
             }
         }
