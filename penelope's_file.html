@@ -169,7 +169,7 @@
         ctx.closePath();
 
     }
-
+    //hi just using this to push
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBall();
@@ -183,34 +183,34 @@
 
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
             if (y > (paddle1Y) && y < (paddle1Y + 34) && dx < 0) {
-                dx = -dx;
+                dx = Math.floor(Math.random() * 7) + 3;
                 dy = -4;
                 document.body.style.backgroundColor = "cornflowerblue";
             }
             else if (y < (paddle1Y + paddle1Width) && y > (paddle1Y + 38) && dx < 0) {
-                dx = -dx;
+                dx = Math.floor(Math.random() * 7) + 3;
                 dy = 4;
                 document.body.style.backgroundColor = "blue";
             }
             else if (y <= (paddle1Y + 38) && y >= (paddle1Y + 34) && dx < 0) {
-                dx = -dx;
+                dx = Math.floor(Math.random() * 7) + 3;
                 dy = 0;
                 document.body.style.backgroundColor = "white";
             }
 
             else if (y > (paddle2Y) && y < (paddle2Y + 34)&& dx > 0) {
-                dx = -dx;
+                dx = -Math.floor(Math.random() * 7) - 3;
                 dy = -4;
                 document.body.style.backgroundColor = "orchid";
 
             }
             else if (y < (paddle2Y + paddle2Width) && y > (paddle2Y + 38) && dx > 0) {
-                dx = -dx;
+                dx = -Math.floor(Math.random() * 7) - 3;
                 dy = 4;
                 document.body.style.backgroundColor = "aqua";
             }
             else if (y <= (paddle2Y + 38) && y >= (paddle2Y + 34) && dx > 0) {
-                dx = -dx;
+                dx = -Math.floor(Math.random() * 7) - 3;
                 dy = 0;
                 document.body.style.backgroundColor = "coral";
             }
@@ -270,10 +270,10 @@
 
         //paddle2
         if(upPressed && paddle2Y > 5) {
-            paddle2Y -= 7;
+            paddle2Y -= 9;
         }
         else if(downPressed && paddle2Y+paddle2Height + 70 < canvas.height) {
-            paddle2Y += 7;
+            paddle2Y += 9;
         }
 
 
