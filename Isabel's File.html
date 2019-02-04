@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Pong</title>
 </head>
 <body>
 
@@ -100,6 +100,53 @@
             downPressed = false;
         }
     }
+    function drawLines() {
+        ctx.beginPath();
+        ctx.rect(canvas.width/2, 3, 3, 24);
+        ctx.fillStyle = "#FFF";
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.rect(canvas.width/2, 53, 3, 24);
+        ctx.fillStyle = "#FFF";
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.rect(canvas.width/2, 103, 3, 24);
+        ctx.fillStyle = "#FFF";
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.rect(canvas.width/2, 153, 3, 24);
+        ctx.fillStyle = "#FFF";
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.rect(canvas.width/2, 203, 3, 24);
+        ctx.fillStyle = "#FFF";
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.rect(canvas.width/2, 253, 3, 24);
+        ctx.fillStyle = "#FFF";
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.rect(canvas.width/2, 303, 3, 24);
+        ctx.fillStyle = "#FFF";
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.rect(canvas.width/2, 353, 3, 24);
+        ctx.fillStyle = "#FFF";
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.rect(canvas.width/2, 403, 3, 24);
+        ctx.fillStyle = "#FFF";
+        ctx.fill();
+        ctx.closePath();
+    }
 
     function drawBall() {
         ctx.beginPath();
@@ -111,33 +158,38 @@
     function drawPaddle1() {
         ctx.beginPath();
         ctx.rect(paddle1X, paddle1Y, paddle1Height, paddle1Width);
-        ctx.fillStyle = "#0010dd";
+        ctx.fillStyle = "#FFF";
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.rect(paddle2X, paddle2Y, paddle2Height, paddle2Width);
+        ctx.fillStyle = "#FFF";
         ctx.fill();
         ctx.closePath();
     }
     function drawPaddle2() {
         ctx.beginPath();
         ctx.rect(paddle2X, paddle2Y, paddle2Height, paddle2Width);
-        ctx.fillStyle = "#0010dd";
+        ctx.fillStyle = "#FFF";
         ctx.fill();
         ctx.closePath();
     }
 
     function drawScore() {
         ctx.font = "16px Arial";
-        ctx.fillStyle = "#ff000b";
+        ctx.fillStyle = "#FFF";
         ctx.fillText("Score P1: "+score, 8, 20);
     }
 
     function drawScore1() {
         ctx.font = "16px Arial";
-        ctx.fillStyle = "#ff000b";
+        ctx.fillStyle = "#FFF";
         ctx.fillText("Score P2: "+score1, canvas.width-100, 20);
     }
     function drawLives() {
         ctx.font = "16px Arial";
-        ctx.fillStyle = "#ff000b";
-        ctx.fillText("Round #"+ rounds, canvas.width/2 - 35, 20);
+        ctx.fillStyle = "#FFF";
+        ctx.fillText("Round #"+ rounds, canvas.width/3, 20);
     }
     function drawFace() {
         if(dx > 0) {
@@ -180,37 +232,39 @@
         drawScore1();
         drawLives();
         drawFace();
+        drawLines();
         if(x + dx > canvas.width-ballRadius - 10 || x + dx < ballRadius + 12) {
             if (y > (paddle1Y) && y < (paddle1Y + 34) && dx < 0) {
                 dx = Math.floor(Math.random() * 7) + 3;
                 dy = -4;
-                document.body.style.backgroundColor = "black";
+                document.body.style.backgroundColor = "cornflowerblue";
             }
             else if (y < (paddle1Y + paddle1Width) && y > (paddle1Y + 38) && dx < 0) {
                 dx = Math.floor(Math.random() * 7) + 3;
                 dy = 4;
-                document.body.style.backgroundColor = "black";
+                document.body.style.backgroundColor = "blue";
             }
             else if (y <= (paddle1Y + 38) && y >= (paddle1Y + 34) && dx < 0) {
                 dx = Math.floor(Math.random() * 7) + 3;
                 dy = 0;
-                document.body.style.backgroundColor = "black";
+                document.body.style.backgroundColor = "white";
             }
 
             else if (y > (paddle2Y) && y < (paddle2Y + 34)&& dx > 0) {
                 dx = -Math.floor(Math.random() * 7) - 3;
                 dy = -4;
-                document.body.style.backgroundColor = "black";
+                document.body.style.backgroundColor = "orchid";
+
             }
             else if (y < (paddle2Y + paddle2Width) && y > (paddle2Y + 38) && dx > 0) {
                 dx = -Math.floor(Math.random() * 7) - 3;
                 dy = 4;
-                document.body.style.backgroundColor = "black";
+                document.body.style.backgroundColor = "aqua";
             }
             else if (y <= (paddle2Y + 38) && y >= (paddle2Y + 34) && dx > 0) {
                 dx = -Math.floor(Math.random() * 7) - 3;
                 dy = 0;
-                document.body.style.backgroundColor = "black";
+                document.body.style.backgroundColor = "coral";
             }
 
 
